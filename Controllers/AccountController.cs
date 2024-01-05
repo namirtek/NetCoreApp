@@ -23,7 +23,7 @@ public class AccountController : BaseApiController
 
     [HttpPost("register")] // POST : api/account/register // !!!! register dto will automaticlly be binded with json transfered paramters (postman) !!!!
 
-    public async Task<ActionResult<AppUser>> Register(RegisterDto registerdto)
+    public async Task<ActionResult<UserDto>> Register(RegisterDto registerdto)
     {
         if (await UserExists(registerdto.username)) return BadRequest("username is taken");
 
@@ -36,10 +36,15 @@ public class AccountController : BaseApiController
             PasswordSalt = hmac.Key
         };
 
-        _context.Users.Add(user);
+         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return user;
+        return new UserDto
+        {
+            Id = user.Id,
+            Username = user.UserName,
+            Token = _tokenService.CreateToken(user)
+        };
     }
 
     [HttpPost("login")]
