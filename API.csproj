@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Data\UserSeedData.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
@@ -20,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="client\_services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\UserSeedData.json" />
   </ItemGroup>
 
 </Project>
